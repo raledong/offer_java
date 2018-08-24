@@ -1,12 +1,25 @@
-/**
- * Alipay.com Inc.
- * Copyright (c) 2004-2018 All Rights Reserved.
- */
 package cn.deerowl.mirror_of_binary_tree_27;
 
-/**
- * @author dongsheng.hds
- * @version $Id: Solution.java, v 0.1 2018-08-01 12:49 dongsheng.hds Exp $$
- */
 public class Solution {
+
+    public void Mirror(TreeNode root) {
+        if (root == null) return;
+        TreeNode lft = root.left;
+        TreeNode rgt = root.right;
+        root.left = rgt;
+        root.right = lft;
+        Mirror(root.left);
+        Mirror(root.right);
+    }
+    public class TreeNode {
+        int val = 0;
+        TreeNode left = null;
+        TreeNode right = null;
+
+        public TreeNode(int val) {
+            this.val = val;
+
+        }
+
+    }
 }

@@ -1,12 +1,60 @@
-/**
- * Alipay.com Inc.
- * Copyright (c) 2004-2018 All Rights Reserved.
- */
 package cn.deerowl.serialize_binary_tree_37;
 
-/**
- * @author dongsheng.hds
- * @version $Id: Solution.java, v 0.1 2018-08-03 18:25 dongsheng.hds Exp $$
- */
+import java.io.Serializable;
+import java.util.LinkedList;
+
 public class Solution {
+
+    String Serialize(TreeNode root) {
+        if(root == null)
+            return "";
+        StringBuilder sb = new StringBuilder();
+        Serialize2(root, sb);
+        return sb.toString();
+    }
+
+    void Serialize2(TreeNode root, StringBuilder sb) {
+        if(root == null) {
+            sb.append("#,");
+            return;
+        }
+        sb.append(root.val);
+        sb.append(',');
+        Serialize2(root.left, sb);
+        Serialize2(root.right, sb);
+    }
+
+    int index = -1;
+
+    TreeNode Deserialize(String str) {
+        if(str.length() == 0)
+            return null;
+        String[] strs = str.split(",");
+        return Deserialize2(strs);
+    }
+
+    TreeNode Deserialize2(String[] strs) {
+        index++;
+        if(!strs[index].equals("#")) {
+            TreeNode root = new TreeNode(0);
+            root.val = Integer.parseInt(strs[index]);
+            root.left = Deserialize2(strs);
+            root.right = Deserialize2(strs);
+            return root;
+        }
+        return null;
+    }
+
+    public class TreeNode {
+        int val = 0;
+        TreeNode left = null;
+        TreeNode right = null;
+
+        public TreeNode(int val) {
+            this.val = val;
+
+        }
+
+    }
+
 }

@@ -11,8 +11,8 @@ public class ImplementStackUsingQueue {
     private LinkedList<Integer> queue2;
 
     public ImplementStackUsingQueue(){
-        queue1 = new LinkedList<>();
-        queue2 = new LinkedList<>();
+        queue1 = new LinkedList<Integer>();
+        queue2 = new LinkedList<Integer>();
     }
     public void push(int e){
         if (queue1.size() == 0){

@@ -1,12 +1,27 @@
-/**
- * Alipay.com Inc.
- * Copyright (c) 2004-2018 All Rights Reserved.
- */
 package cn.deerowl.reverse_linked_list_24;
 
-/**
- * @author dongsheng.hds
- * @version $Id: Solution.java, v 0.1 2018-08-01 9:36 dongsheng.hds Exp $$
- */
 public class Solution {
+
+    public ListNode ReverseList(ListNode head) {
+        if (head==null || head.next == null) return head;
+        ListNode dummuy = new ListNode(-1);
+        dummuy.next = head;
+        ListNode tmp = head;
+        while (tmp.next != null) {
+            ListNode curHead = dummuy.next;
+            dummuy.next = tmp.next;
+            tmp.next = tmp.next.next;
+            dummuy.next.next = curHead;
+        }
+        return dummuy.next;
+    }
+
+    public class ListNode {
+        int val;
+        ListNode next = null;
+
+        ListNode(int val) {
+            this.val = val;
+        }
+    }
 }

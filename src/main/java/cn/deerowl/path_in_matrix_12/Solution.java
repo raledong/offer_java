@@ -1,4 +1,4 @@
-package cn.deerowl.path_in_matrix_12.README;
+package cn.deerowl.path_in_matrix_12;
 
 public class Solution {
 
@@ -6,14 +6,19 @@ public class Solution {
         if (matrix==null || matrix.length == 0) {return false;}
         int length = matrix.length;
         boolean[] hasVisited = new boolean[length];
-        return hasPath(matrix, hasVisited, 0, 0, rows, cols, str, 0);
+        for (int i = 0 ; i<rows ; i++){
+            for (int j = 0 ; j<cols ; j++){
+                if (hasPath(matrix, hasVisited, i, j, rows, cols, str, 0)) return true;
+            }
+        }
+        return false;
     }
 
     public boolean hasPath(char[] matrix, boolean[] hasVisited, int row, int col, int rows, int cols, char[] str, int index){
-        if (row<0 || row>=rows || col<0 || col >= cols) return false;
-        if (index == str.length) return true;
+        if (row<0 || row>=rows || col<0 || col >= cols ) return false;
         int matrixIndex = row * cols + col;
-        if (matrix[matrixIndex] != str[index]) return false;
+        if (hasVisited[matrixIndex] || matrix[matrixIndex] != str[index]) return false;
+        if (index == str.length-1) return true;
         hasVisited[matrixIndex] = true;
         boolean hasPath = hasPath(matrix, hasVisited, row-1, col, rows, cols, str, index+1)
                 || hasPath(matrix, hasVisited, row+1, col, rows, cols, str, index+1)

@@ -1,12 +1,35 @@
-/**
- * Alipay.com Inc.
- * Copyright (c) 2004-2018 All Rights Reserved.
- */
 package cn.deerowl.k_min_number_40;
 
-/**
- * @author dongsheng.hds
- * @version $Id: Solution.java, v 0.1 2018-08-04 15:47 dongsheng.hds Exp $$
- */
+
+import java.util.ArrayList;
+import java.util.PriorityQueue;
+import java.util.Comparator;
 public class Solution {
+    public ArrayList<Integer> GetLeastNumbers_Solution(int[] input, int k) {
+        ArrayList<Integer> result = new ArrayList<Integer>();
+        int length = input.length;
+        if(k > length || k == 0){
+            return result;
+        }
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<Integer>(k, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o2.compareTo(o1);
+            }
+        });
+
+        for (int i = 0; i < length; i++) {
+            if (maxHeap.size() != k) {
+                maxHeap.offer(input[i]);
+            } else if (maxHeap.peek() > input[i]) {
+                Integer temp = maxHeap.poll();
+                temp = null;
+                maxHeap.offer(input[i]);
+            }
+        }
+        for (Integer integer : maxHeap) {
+            result.add(integer);
+        }
+        return result;
+    }
 }

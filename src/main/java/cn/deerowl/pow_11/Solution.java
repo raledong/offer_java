@@ -18,7 +18,7 @@ public class Solution {
         if (exponent == 1) {
             return base;
         }
-        double res = Power(base, exponent >> 1);
+        double res = Helper(base, exponent >> 1);
         res *= res;
         if ((exponent & 0x1) == 1) {
             res *= base;
