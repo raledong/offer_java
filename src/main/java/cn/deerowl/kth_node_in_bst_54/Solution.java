@@ -2,16 +2,17 @@ package cn.deerowl.kth_node_in_bst_54;
 
 public class Solution {
 
-    public TreeNode TreeDepth(TreeNode root, int k) {
-        if (root == null) return null;
-        return TreeDepthCore(root, k);
+    TreeNode KthNode(TreeNode pRoot, int k) {
+        if (pRoot == null) return null;
+        this.k = k;
+        return TreeDepthCore(pRoot);
     }
 
-
-    public TreeNode TreeDepthCore(TreeNode root, int k) {
+    int k;
+    public TreeNode TreeDepthCore(TreeNode root) {
         TreeNode target = null;
         if (root.left != null) {
-            target = TreeDepthCore(root.left, k);
+            target = TreeDepthCore(root.left);
         }
         if (target == null) {
             if (k==1) {
@@ -20,7 +21,7 @@ public class Solution {
             k--;
         }
         if (target == null && root.right != null) {
-            target = TreeDepthCore(root.right, k);
+            target = TreeDepthCore(root.right);
         }
         return target;
     }
